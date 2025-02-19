@@ -42,7 +42,7 @@ POST /append_pool
 **Response:**
 ```json
 {
-  "status": "processing"
+  "status": "appended"
 }
 ```
 

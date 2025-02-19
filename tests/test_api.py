@@ -12,7 +12,7 @@ def test_append_pool():
     """Test appending values to a pool."""
     response = client.post("/append_pool", json={"poolId": 1, "poolValues": [10, 20, 30]})
     assert response.status_code == 200
-    assert response.json() == {"status": "processing"}
+    assert response.json() == {"status": "appended"}
 
 def test_query_pool():
     """Test querying a quantile from a pool."""

@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException
 from app.models import AppendPoolRequest, QueryPoolRequest
 from app.services import compute_quantile
 from app.storage import get_pool_values, append_to_pool
@@ -8,13 +8,16 @@ appAPI = FastAPI()
 
 
 @appAPI.post("/append_pool")
-async def append_pool(request: AppendPoolRequest, background_tasks: BackgroundTasks):
+async def append_pool(request: AppendPoolRequest):
     """Append values asynchronously to reduce request latency."""
     if not request.poolValues:
         raise HTTPException(status_code=400, detail="poolValues must not be empty")
 
-    background_tasks.add_task(append_to_pool, request.poolId, request.poolValues)
-    return {"status": "processing"}
+    pool_id = request.poolId
+    pool_values = request.poolValues
+
+    status = append_to_pool(pool_id, pool_values)
+    return {"status": status}
 
 
 @appAPI.post("/query_pool")
