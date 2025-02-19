@@ -9,8 +9,6 @@ This is a FastAPI-based service that provides quantile computation for dynamical
 ## Features
 - Efficient quantile computation using **NumPy** for large pools.
 - **Thread-safe** storage with an in-memory data structure.
-- **Optimized insertion** using `bisect.insort()` for better query performance.
-- **Asynchronous background processing** for appending data.
 
 ## Installation
 
@@ -42,7 +40,7 @@ POST /append_pool
 **Response:**
 ```json
 {
-  "status": "appended"
+  "status": "inserted"
 }
 ```
 
